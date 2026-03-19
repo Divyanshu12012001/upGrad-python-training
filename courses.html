@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses – ELearn</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="dashboard.html">E<span>Learn</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto gap-1">
+            <li class="nav-item"><a class="nav-link" data-page="dashboard" href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link active" data-page="courses" href="courses.html">📚 Courses</a></li>
+            <li class="nav-item"><a class="nav-link" data-page="quiz" href="quiz.html">📝 Quiz</a></li>
+            <li class="nav-item"><a class="nav-link" data-page="profile" href="profile.html">👤 Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="breadcrumb-section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">🏠 Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">📚 Courses</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>📚 Course Catalog</h1>
+      <p>Explore all available courses and start learning today.</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+
+      <div class="d-flex flex-wrap gap-2 mb-4 align-items-center">
+        <span class="fw-semibold me-2">Filter:</span>
+        <button class="btn btn-sm btn-primary filter-btn active" data-filter="all">All</button>
+        <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="Web Development">Web Dev</button>
+        <button class="btn btn-sm btn-outline-primary filter-btn" data-filter="Programming">Programming</button>
+      </div>
+
+      <section aria-label="Course Cards" class="mb-5">
+        <div class="course-cards-container" id="courseCardsContainer"></div>
+      </section>
+
+      <section aria-label="Course Summary Table" class="mb-5">
+        <h4 class="fw-bold mb-3">📋 Course Overview Table</h4>
+        <div class="table-wrapper">
+          <table class="table table-hover mb-0" data-type="courses" aria-label="Course list">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course</th>
+                <th scope="col">Category</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Lessons</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="courseTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-label="Lesson Details">
+        <h4 class="fw-bold mb-3">📖 Lesson Breakdown</h4>
+        <div class="row g-3" id="lessonCards"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="completionToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive">
+      <div class="d-flex">
+        <div class="toast-body fw-semibold" id="toastMsg">✅ Course marked as completed!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 <a href="dashboard.html">ELearn</a> — Built for learners, by learners.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const courses = [
+      { id:1, title:"HTML & CSS Fundamentals", category:"Web Development", duration:"4 hours", lessons:["Introduction to HTML","HTML Elements & Attributes","CSS Selectors & Properties","Box Model & Layout","Responsive Design Basics"], description:"Learn the building blocks of the web with HTML and CSS.", icon:"🌐" },
+      { id:2, title:"JavaScript Essentials", category:"Programming", duration:"6 hours", lessons:["Variables & Data Types","Functions & Scope","DOM Manipulation","Events & Listeners","Async JavaScript"], description:"Master core JavaScript concepts for modern web development.", icon:"⚡" },
+      { id:3, title:"Bootstrap Framework", category:"Web Development", duration:"3 hours", lessons:["Grid System","Components Overview","Utility Classes","Forms & Validation","Customizing Bootstrap"], description:"Build responsive UIs quickly using Bootstrap 5.", icon:"🎨" },
+      { id:4, title:"Python for Beginners", category:"Programming", duration:"8 hours", lessons:["Python Syntax & Variables","Control Flow","Functions & Modules","File Handling","Introduction to OOP"], description:"Start your programming journey with Python.", icon:"🐍" }
+    ];
+
+    const Storage = {
+      completeCourse(id) { const c=this.getCompletedCourses(); if(!c.includes(id)){c.push(id);localStorage.setItem("completedCourses",JSON.stringify(c));} },
+      getCompletedCourses() { return JSON.parse(localStorage.getItem("completedCourses")||"[]"); },
+      isCourseCompleted(id) { return this.getCompletedCourses().includes(id); }
+    };
+
+    function renderCards(list) {
+      document.getElementById("courseCardsContainer").innerHTML = list.map(course => {
+        const done = Storage.isCourseCompleted(course.id);
+        return `
+          <article class="course-card" aria-label="${course.title}">
+            <div class="course-card-icon">${course.icon}</div>
+            <div class="course-card-title">${course.title}</div>
+            <p class="course-card-desc">${course.description}</p>
+            <div class="course-card-meta">
+              <span class="badge-category">${course.category}</span>
+              <span>⏱ ${course.duration}</span>
+              <span>📖 ${course.lessons.length} lessons</span>
+            </div>
+            <div class="mb-3">
+              <div class="progress-label"><span>Progress</span><span>${done?"100":"0"}%</span></div>
+              <progress value="${done?100:0}" max="100" aria-label="${course.title} completion"></progress>
+            </div>
+            ${done
+              ? `<span class="completed-badge">✅ Completed</span>`
+              : `<button class="btn-primary-custom w-100 mt-2" onclick="completeCourse(${course.id})">Mark as Complete</button>`
+            }
+          </article>`;
+      }).join("");
+    }
+
+    function renderTable(list) {
+      document.getElementById("courseTableBody").innerHTML = list.map((course, i) => {
+        const done = Storage.isCourseCompleted(course.id);
+        return `
+          <tr>
+            <td>${i+1}</td>
+            <td><strong>${course.icon} ${course.title}</strong></td>
+            <td><span class="badge-category">${course.category}</span></td>
+            <td>${course.duration}</td>
+            <td>${course.lessons.length}</td>
+            <td>${done ? `<span class="completed-badge">✅ Done</span>` : `<span class="badge bg-warning text-dark">In Progress</span>`}</td>
+            <td><a href="quiz.html" class="btn btn-sm btn-outline-primary">Take Quiz</a></td>
+          </tr>`;
+      }).join("");
+    }
+
+    function renderLessonCards(list) {
+      document.getElementById("lessonCards").innerHTML = list.map(course => `
+        <div class="col-md-6">
+          <div class="sidebar-card h-100">
+            <h5>${course.icon} ${course.title}</h5>
+            <ol class="lesson-list" aria-label="Lessons for ${course.title}">
+              ${course.lessons.map(l => `<li>${l}</li>`).join("")}
+            </ol>
+          </div>
+        </div>`).join("");
+    }
+
+    function completeCourse(courseId) {
+      Storage.completeCourse(courseId);
+      const activeFilter = document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+      const filtered = activeFilter === "all" ? courses : courses.filter(c => c.category === activeFilter);
+      renderCards(filtered);
+      renderTable(filtered);
+      const course = courses.find(c => c.id === courseId);
+      document.getElementById("toastMsg").textContent = `✅ "${course.title}" marked as completed!`;
+      new bootstrap.Toast(document.getElementById("completionToast"), { delay: 3000 }).show();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCards(courses);
+      renderTable(courses);
+      renderLessonCards(courses);
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-btn").forEach(b => {
+            b.classList.remove("active","btn-primary");
+            b.classList.add("btn-outline-primary");
+          });
+          btn.classList.add("active","btn-primary");
+          btn.classList.remove("btn-outline-primary");
+          const filtered = btn.dataset.filter === "all" ? courses : courses.filter(c => c.category === btn.dataset.filter);
+          renderCards(filtered);
+          renderTable(filtered);
+          renderLessonCards(filtered);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

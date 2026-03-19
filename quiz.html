@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz – ELearn</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="dashboard.html">E<span>Learn</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto gap-1">
+            <li class="nav-item"><a class="nav-link" data-page="dashboard" href="dashboard.html">🏠 Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" data-page="courses" href="courses.html">📚 Courses</a></li>
+            <li class="nav-item"><a class="nav-link active" data-page="quiz" href="quiz.html">📝 Quiz</a></li>
+            <li class="nav-item"><a class="nav-link" data-page="profile" href="profile.html">👤 Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="breadcrumb-section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">🏠 Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">📝 Quiz</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>📝 Knowledge Quiz</h1>
+      <p>Test your understanding across all course topics.</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <div class="quiz-container">
+
+        <div id="loadingState" class="loading-overlay">
+          <div class="spinner" role="status" aria-label="Loading quiz"></div>
+          <p>Loading quiz questions…</p>
+        </div>
+
+        <div id="quizContent" style="display:none;">
+          <div class="quiz-header-bar">
+            <div>
+              <span class="fw-bold" style="color:var(--primary)">📝 General Knowledge Quiz</span>
+              <span class="text-muted ms-2" id="questionCount"></span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span id="answeredCount" class="text-muted small">0 answered</span>
+              <div style="width:140px;">
+                <progress id="quizProgress" value="0" max="10" aria-label="Quiz completion progress"></progress>
+              </div>
+            </div>
+          </div>
+
+          <form id="quizForm" novalidate>
+            <div id="questionsContainer"></div>
+            <div class="text-center mt-3 mb-4">
+              <button type="button" id="submitBtn" class="btn-primary-custom px-5 py-3"
+                onclick="submitQuiz()" style="font-size:1.05rem;">
+                🚀 Submit Quiz
+              </button>
+            </div>
+          </form>
+
+          <div id="resultSection" style="display:none;">
+            <div class="result-section">
+              <div style="font-size:3rem;margin-bottom:0.5rem" id="resultEmoji">🏆</div>
+              <div class="result-score" id="resultScore">0%</div>
+              <div class="result-grade" id="resultGrade">Grade: A</div>
+              <div class="result-feedback" id="resultFeedback">Excellent work!</div>
+              <div class="row g-3 mb-4 text-start">
+                <div class="col-4">
+                  <div class="sidebar-card text-center py-3">
+                    <div style="font-size:1.8rem;font-weight:700;color:var(--success)" id="correctCount">0</div>
+                    <div class="text-muted small">Correct</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="sidebar-card text-center py-3">
+                    <div style="font-size:1.8rem;font-weight:700;color:var(--danger)" id="wrongCount">0</div>
+                    <div class="text-muted small">Wrong</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="sidebar-card text-center py-3">
+                    <div style="font-size:1.8rem;font-weight:700;color:var(--warning)" id="skippedCount">0</div>
+                    <div class="text-muted small">Skipped</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <button class="btn-primary-custom" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+                <a href="dashboard.html" class="btn btn-outline-primary px-4">🏠 Dashboard</a>
+                <a href="profile.html" class="btn btn-outline-secondary px-4">👤 View Profile</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 <a href="dashboard.html">ELearn</a> — Built for learners, by learners.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const quizQuestions = [
+      { id:1, question:"Which HTML tag is used to define an unordered list?", options:["<ol>","<ul>","<li>","<list>"], answer:1 },
+      { id:2, question:"Which CSS property controls the text size?", options:["font-weight","text-size","font-size","text-style"], answer:2 },
+      { id:3, question:"What does DOM stand for?", options:["Document Object Model","Data Object Management","Document Oriented Model","Dynamic Object Module"], answer:0 },
+      { id:4, question:"Which keyword declares a block-scoped variable in JavaScript?", options:["var","let","define","set"], answer:1 },
+      { id:5, question:"What is the output of typeof null in JavaScript?", options:["null","undefined","object","string"], answer:2 },
+      { id:6, question:"Which Bootstrap class creates a responsive container?", options:[".wrapper",".container",".box",".grid"], answer:1 },
+      { id:7, question:"Which method adds an element at the end of a JavaScript array?", options:["push()","pop()","shift()","append()"], answer:0 },
+      { id:8, question:"What does CSS stand for?", options:["Computer Style Sheets","Creative Style Syntax","Cascading Style Sheets","Colorful Style Sheets"], answer:2 },
+      { id:9, question:"Which Python function prints output to the console?", options:["echo()","console.log()","print()","write()"], answer:2 },
+      { id:10, question:"What is the correct way to write an arrow function in JavaScript?", options:["function => () {}","const fn = () => {}","fn() -> {}","arrow fn() {}"], answer:1 }
+    ];
+
+    const Storage = {
+      saveQuizResult(r) { const h=this.getQuizHistory(); h.unshift(r); localStorage.setItem("quizHistory",JSON.stringify(h.slice(0,10))); },
+      getQuizHistory() { return JSON.parse(localStorage.getItem("quizHistory")||"[]"); }
+    };
+
+    function calculateGrade(p) {
+      if (p >= 90) return "A+";
+      else if (p >= 80) return "A";
+      else if (p >= 70) return "B";
+      else if (p >= 60) return "C";
+      else if (p >= 50) return "D";
+      else return "F";
+    }
+
+    function calculatePercentage(score, total) {
+      if (total === 0) return 0;
+      return Math.round((score / total) * 100);
+    }
+
+    function isPassed(p) { return p >= 50; }
+
+    function getPerformanceFeedback(grade) {
+      switch (grade) {
+        case "A+": return { msg:"Outstanding! You're a star learner! 🌟", emoji:"🏆" };
+        case "A":  return { msg:"Excellent work! Keep it up! 🎉", emoji:"🥇" };
+        case "B":  return { msg:"Good job! A little more practice and you'll ace it!", emoji:"👍" };
+        case "C":  return { msg:"Not bad! Review the material and try again.", emoji:"📖" };
+        case "D":  return { msg:"You passed, but there's room to improve.", emoji:"💪" };
+        default:   return { msg:"Don't give up! Review the courses and try again.", emoji:"🔄" };
+      }
+    }
+
+    function loadQuizData() {
+      return new Promise(resolve => setTimeout(() => resolve(quizQuestions), 1500));
+    }
+
+    async function initQuiz() {
+      const questions = await loadQuizData();
+      document.getElementById("questionCount").textContent = `${questions.length} Questions`;
+      document.getElementById("quizProgress").max = questions.length;
+      document.getElementById("questionsContainer").innerHTML = questions.map((q, i) => `
+        <div class="question-card" id="qcard-${q.id}">
+          <div class="question-number">Question ${i+1} of ${questions.length}</div>
+          <div class="question-text">${q.question}</div>
+          <div>
+            ${q.options.map((opt, j) => `
+              <label class="option-label" id="opt-${q.id}-${j}">
+                <input type="radio" name="q${q.id}" value="${j}" onchange="onAnswerChange()" aria-label="${opt}" />
+                <span>${opt}</span>
+              </label>`).join("")}
+          </div>
+        </div>`).join("");
+      document.getElementById("loadingState").style.display = "none";
+      document.getElementById("quizContent").style.display = "block";
+    }
+
+    function onAnswerChange() {
+      const answered = quizQuestions.filter(q => document.querySelector(`input[name="q${q.id}"]:checked`)).length;
+      document.getElementById("answeredCount").textContent = `${answered} answered`;
+      document.getElementById("quizProgress").value = answered;
+    }
+
+    function submitQuiz() {
+      const unanswered = quizQuestions.filter(q => !document.querySelector(`input[name="q${q.id}"]:checked`));
+      if (unanswered.length > 0 && !confirm(`You have ${unanswered.length} unanswered question(s). Submit anyway?`)) return;
+
+      let score = 0, wrong = 0, skipped = 0;
+      quizQuestions.forEach(q => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        q.options.forEach((_, j) => {
+          const label = document.getElementById(`opt-${q.id}-${j}`);
+          label.querySelector("input").disabled = true;
+          if (j === q.answer) label.classList.add("correct");
+          else if (selected && parseInt(selected.value) === j) label.classList.add("incorrect");
+        });
+        if (!selected) skipped++;
+        else if (parseInt(selected.value) === q.answer) score++;
+        else wrong++;
+      });
+
+      const total = quizQuestions.length;
+      const percentage = calculatePercentage(score, total);
+      const grade = calculateGrade(percentage);
+      const passed = isPassed(percentage);
+      const feedback = getPerformanceFeedback(grade);
+
+      Storage.saveQuizResult({ score, total, percentage, grade, passed, date: new Date().toISOString() });
+
+      document.getElementById("resultScore").textContent = `${percentage}%`;
+      document.getElementById("resultGrade").textContent = `Grade: ${grade} — ${passed ? "✅ PASSED" : "❌ FAILED"}`;
+      document.getElementById("resultFeedback").textContent = feedback.msg;
+      document.getElementById("resultEmoji").textContent = feedback.emoji;
+      document.getElementById("correctCount").textContent = score;
+      document.getElementById("wrongCount").textContent = wrong;
+      document.getElementById("skippedCount").textContent = skipped;
+      document.getElementById("submitBtn").style.display = "none";
+      document.getElementById("resultSection").style.display = "block";
+      document.getElementById("resultSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function retakeQuiz() {
+      document.getElementById("resultSection").style.display = "none";
+      document.getElementById("submitBtn").style.display = "inline-block";
+      document.getElementById("quizContent").style.display = "none";
+      document.getElementById("loadingState").style.display = "flex";
+      document.getElementById("answeredCount").textContent = "0 answered";
+      document.getElementById("quizProgress").value = 0;
+      initQuiz();
+    }
+
+    document.addEventListener("DOMContentLoaded", initQuiz);
+  </script>
+</body>
+</html>
