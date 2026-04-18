@@ -1,0 +1,251 @@
+{
+  "info": {
+    "name": "ELearn API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" },
+    { "key": "userId", "value": "1" },
+    { "key": "courseId", "value": "1" },
+    { "key": "quizId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/users/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"Test123!\"\n}" }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('token', json.token);",
+                  "pm.collectionVariables.set('userId', json.userId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/users/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@elearn.com\",\n  \"password\": \"Admin123!\"\n}" }
+          }
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/users/{{userId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "url": "{{base}}/users/{{userId}}",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"Updated Name\",\n  \"email\": \"admin@elearn.com\",\n  \"bio\": \"Platform admin\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/courses",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Course By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/courses/{{courseId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/courses",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"New Course\",\n  \"description\": \"Course description\",\n  \"category\": \"Programming\",\n  \"duration\": \"5 hours\",\n  \"icon\": \"🚀\",\n  \"createdBy\": 1\n}" }
+          }
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PUT",
+            "url": "{{base}}/courses/{{courseId}}",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated Title\",\n  \"description\": \"Updated desc\",\n  \"category\": \"Web Development\",\n  \"duration\": \"4 hours\",\n  \"icon\": \"🌐\"\n}" }
+          }
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base}}/courses/{{courseId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Lessons For Course",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/courses/{{courseId}}/lessons",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lessons",
+      "item": [
+        {
+          "name": "Create Lesson",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/lessons",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"courseId\": 1,\n  \"title\": \"New Lesson\",\n  \"content\": \"Lesson content here.\",\n  \"orderIndex\": 6\n}" }
+          }
+        },
+        {
+          "name": "Update Lesson",
+          "request": {
+            "method": "PUT",
+            "url": "{{base}}/lessons/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated Lesson\",\n  \"content\": \"Updated content.\",\n  \"orderIndex\": 1\n}" }
+          }
+        },
+        {
+          "name": "Delete Lesson",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base}}/lessons/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quizzes",
+      "item": [
+        {
+          "name": "Get Quizzes By Course",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/quizzes/by-course/{{courseId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Create Quiz",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/quizzes",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"courseId\": 1,\n  \"title\": \"New Quiz\"\n}" }
+          }
+        },
+        {
+          "name": "Get Questions For Quiz",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/quizzes/{{quizId}}/questions",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Submit Quiz",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/quizzes/{{quizId}}/submit",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"userId\": 1,\n  \"answers\": [\n    { \"questionId\": 1, \"selectedAnswer\": \"B\" },\n    { \"questionId\": 2, \"selectedAnswer\": \"C\" },\n    { \"questionId\": 3, \"selectedAnswer\": \"C\" }\n  ]\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Questions",
+      "item": [
+        {
+          "name": "Add Question",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/questions",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"quizId\": 1,\n  \"questionText\": \"What is 2 + 2?\",\n  \"optionA\": \"3\",\n  \"optionB\": \"4\",\n  \"optionC\": \"5\",\n  \"optionD\": \"6\",\n  \"correctAnswer\": \"B\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Results",
+      "item": [
+        {
+          "name": "Get Results For User",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/results/{{userId}}",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Above Average Results",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/results/above-average",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}
