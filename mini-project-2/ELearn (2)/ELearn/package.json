@@ -1,0 +1,14 @@
+{
+  "name": "elearn-platform",
+  "version": "1.0.0",
+  "description": "Multi-page E-Learning Platform (Frontend)",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

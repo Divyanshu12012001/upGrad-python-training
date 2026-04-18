@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – ELearn</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .auth-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+    .auth-card { background: var(--card-bg); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: var(--shadow); }
+    .auth-logo { font-size: 2rem; font-weight: 800; color: var(--primary); text-align: center; margin-bottom: 0.25rem; }
+    .auth-logo span { color: var(--text); }
+    .auth-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+    .tab-btns { display: flex; gap: 0; margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .tab-btn { flex: 1; padding: 0.6rem; border: none; background: transparent; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .tab-btn.active { background: var(--primary); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo">E<span>Learn</span></div>
+      <div class="auth-subtitle">Your learning journey starts here</div>
+
+      <div class="tab-btns">
+        <button class="tab-btn active" id="tabLogin" onclick="showTab('login')">Login</button>
+        <button class="tab-btn" id="tabRegister" onclick="showTab('register')">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" novalidate>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="admin@elearn.com" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required />
+        </div>
+        <div id="loginError" class="text-danger small mb-2" style="display:none;"></div>
+        <button type="submit" class="btn-primary-custom w-100">Login →</button>
+        <p class="text-muted small text-center mt-3">Demo: admin@elearn.com / Admin123!</p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" style="display:none;" novalidate>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Full Name</label>
+          <input type="text" id="regName" class="form-control" placeholder="Your Name" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="you@example.com" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" required />
+        </div>
+        <div id="registerError" class="text-danger small mb-2" style="display:none;"></div>
+        <div id="registerSuccess" class="text-success small mb-2" style="display:none;"></div>
+        <button type="submit" class="btn-primary-custom w-100">Create Account →</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="api.js"></script>
+  <script>
+    // Redirect if already logged in
+    if (Auth.isLoggedIn()) window.location.href = 'dashboard.html';
+
+    function showTab(tab) {
+      document.getElementById('loginForm').style.display    = tab === 'login'    ? 'block' : 'none';
+      document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('tabLogin').classList.toggle('active',    tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const email    = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errEl    = document.getElementById('loginError');
+      errEl.style.display = 'none';
+      try {
+        const res = await fetch(`${API_BASE}/users/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        if (!res.ok) { errEl.textContent = 'Invalid email or password.'; errEl.style.display = 'block'; return; }
+        const data = await res.json();
+        Auth.setUser(data.userId, data.fullName, data.token);
+        window.location.href = 'dashboard.html';
+      } catch {
+        errEl.textContent = 'Could not connect to server.'; errEl.style.display = 'block';
+      }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const fullName = document.getElementById('regName').value.trim();
+      const email    = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const errEl    = document.getElementById('registerError');
+      const okEl     = document.getElementById('registerSuccess');
+      errEl.style.display = 'none'; okEl.style.display = 'none';
+      if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
+      try {
+        const res = await fetch(`${API_BASE}/users/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, email, password })
+        });
+        if (res.status === 409) { errEl.textContent = 'Email already registered.'; errEl.style.display = 'block'; return; }
+        if (!res.ok) { errEl.textContent = 'Registration failed.'; errEl.style.display = 'block'; return; }
+        okEl.textContent = '✅ Account created! Please login.'; okEl.style.display = 'block';
+        setTimeout(() => showTab('login'), 1500);
+      } catch {
+        errEl.textContent = 'Could not connect to server.'; errEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
