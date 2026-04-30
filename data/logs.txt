@@ -1,0 +1,267 @@
+2025-04-28 06:00:01 | INFO     | tickets | CALL  → TicketStore.create_ticket()
+2025-04-28 06:00:01 | INFO     | tickets | Created IncidentTicket TKT-0008 | P1 | System Monitor
+2025-04-28 06:00:01 | INFO     | tickets | DONE  ← TicketStore.create_ticket() [12.3ms]
+2025-04-28 07:45:00 | INFO     | tickets | CALL  → TicketStore.create_ticket()
+2025-04-28 07:45:00 | INFO     | tickets | Created IncidentTicket TKT-0007 | P2 | Grace Hall
+2025-04-28 08:00:00 | WARNING  | tickets | SLA BREACH: TKT-0001 | P1 | Alice Smith
+2025-04-28 08:00:00 | WARNING  | tickets | Ticket TKT-0001 ESCALATED.
+2025-04-28 08:15:00 | INFO     | itil    | CALL  → ITILManager.handle_incident()
+2025-04-28 08:15:01 | INFO     | itil    | Incident handled: TKT-0001
+2025-04-28 08:45:00 | WARNING  | monitor | MONITOR ALERT | CPU | CPU usage critical: 93.2% (threshold 90%)
+2025-04-28 08:45:00 | CRITICAL | monitor | Auto-ticket created: TKT-0008 for alert: CPU
+2025-04-28 09:00:00 | INFO     | itil    | CALL  → ITILManager.create_change_request()
+2025-04-28 09:00:00 | INFO     | itil    | Change request created: CHG-0001 | Normal | UPS Firmware Upgrade
+2025-04-28 10:00:00 | WARNING  | itil    | PROBLEM RECORD CREATED: PRB-0001 | Pattern: server down rack | 2 linked tickets
+2025-04-28 11:00:00 | INFO     | reports | Daily report generated: 8 tickets, 2 SLA breaches
+2026-04-30 12:33:00 | INFO     | tickets | Loaded 8 tickets from /home/claude/smart_it_service_desk/data/tickets.json
+2026-04-30 12:33:00 | INFO     | utils | CALL  → ReportGenerator.daily_report()
+2026-04-30 12:33:00 | INFO     | reports | Daily report generated: 0 tickets, 7 SLA breaches
+2026-04-30 12:33:00 | INFO     | utils | DONE  ← ReportGenerator.daily_report() [0.3ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P1' matched keyword 'server down'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpg3g_qt4u/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | Alice Smith
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [1.2ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp12w8iy9o/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created ServiceRequest TKT-0001 | P4 | Bob Jones
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | ERROR    | utils | ERROR in TicketStore.create_ticket(): Invalid employee name: '1'
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | ERROR    | utils | ERROR in TicketStore.create_ticket(): Category must be one of ('Hardware', 'Software', 'Network', 'Security', 'Access', 'Other')
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpqqazkntg/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Alice Smith
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 2 tickets → /tmp/tmpqqazkntg/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0002 | P4 | Bob Jones
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 3 tickets → /tmp/tmpqqazkntg/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0003 | P4 | Carol White
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 4 tickets → /tmp/tmpqqazkntg/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0004 | P4 | Dave Lee
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [31.5ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 5 tickets → /tmp/tmpqqazkntg/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0005 | P4 | Eve Brown
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [1.0ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp7w389fx4/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Carol White
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | tickets | Loaded 1 tickets from /tmp/tmp7w389fx4/data/tickets.json
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P3' matched keyword 'laptop slow'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp66i61o4z/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P3 | Dave Lee
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpr253l473/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Eve Brown
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.6ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpr253l473/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Ticket TKT-0001 status → In Progress
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.update_status() [0.6ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpkzivbe9b/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Frank Green
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.6ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpkzivbe9b/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Ticket TKT-0001 status → Closed
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.update_status() [0.7ms]
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.close_ticket() [1.1ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmppssi7chj/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Grace Hall
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmppssi7chj/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Ticket TKT-0001 status → Closed
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.update_status() [0.5ms]
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.close_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 12:33:03 | ERROR    | utils | ERROR in TicketStore.update_status(): Ticket TKT-0001 is already closed.
+2026-04-30 12:33:03 | ERROR    | utils | ERROR in TicketStore.close_ticket(): Ticket TKT-0001 is already closed.
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P2' matched keyword 'network down'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmpn_1thb2x/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Henry Ford
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.delete_ticket()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 0 tickets → /tmp/tmpn_1thb2x/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Deleted ticket TKT-0001
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.delete_ticket() [0.5ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp1vun7b7q/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Iris Chan
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.9ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 2 tickets → /tmp/tmp1vun7b7q/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0002 | P4 | Jack Wu
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [1.0ms]
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P1' matched keyword 'server down'
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P3' matched keyword 'laptop slow'
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 12:33:03 | CRITICAL | monitor | MONITOR ALERT | CPU | CPU usage critical: 95.0%
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp51owsksv/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | System Monitor
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.6ms]
+2026-04-30 12:33:03 | CRITICAL | monitor | Auto-ticket created: TKT-0001 for alert: CPU
+2026-04-30 12:33:03 | INFO     | utils | CALL  → backup_tickets_to_csv()
+2026-04-30 12:33:03 | INFO     | utils | Backed up 1 tickets → /tmp/tmpg2y1auk3/backup.csv
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← backup_tickets_to_csv() [0.5ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 12:33:03 | INFO     | utils | Auto-priority 'P1' matched keyword 'server crash'
+2026-04-30 12:33:03 | INFO     | tickets | Saved 1 tickets → /tmp/tmp417fx1j2/data/tickets.json
+2026-04-30 12:33:03 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | JSON Test
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 12:33:03 | INFO     | utils | CALL  → backup_tickets_to_csv()
+2026-04-30 12:33:03 | WARNING  | utils | backup_tickets_to_csv: no tickets to back up.
+2026-04-30 12:33:03 | INFO     | utils | DONE  ← backup_tickets_to_csv() [0.2ms]
+2026-04-30 12:33:03 | INFO     | tickets | ServiceRequest TKT-0002 approved.
+2026-04-30 12:33:03 | WARNING  | tickets | Ticket TKT-0003 ESCALATED.
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P1' matched keyword 'server down'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp9h4gm7wr\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | Alice Smith
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [1.2ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp_1w737zv\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created ServiceRequest TKT-0001 | P4 | Bob Jones
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | ERROR    | utils | ERROR in TicketStore.create_ticket(): Invalid employee name: '1'
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | ERROR    | utils | ERROR in TicketStore.create_ticket(): Category must be one of ('Hardware', 'Software', 'Network', 'Security', 'Access', 'Other')
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpu5lrxy8i\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Alice Smith
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 2 tickets → C:\Users\malik\AppData\Local\Temp\tmpu5lrxy8i\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0002 | P4 | Bob Jones
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 3 tickets → C:\Users\malik\AppData\Local\Temp\tmpu5lrxy8i\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0003 | P4 | Carol White
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 4 tickets → C:\Users\malik\AppData\Local\Temp\tmpu5lrxy8i\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0004 | P4 | Dave Lee
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.6ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 5 tickets → C:\Users\malik\AppData\Local\Temp\tmpu5lrxy8i\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0005 | P4 | Eve Brown
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp08z5lv7z\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Carol White
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | tickets | Loaded 1 tickets from C:\Users\malik\AppData\Local\Temp\tmp08z5lv7z\data\tickets.json
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P3' matched keyword 'laptop slow'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpv6u1d7qw\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P3 | Dave Lee
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpsx_bterm\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Eve Brown
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [1.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpsx_bterm\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Ticket TKT-0001 status → In Progress
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.update_status() [1.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp7celrosi\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Frank Green
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp7celrosi\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Ticket TKT-0001 status → Closed
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.update_status() [0.6ms]
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.close_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp234q5wgp\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P4 | Grace Hall
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.5ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp234q5wgp\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Ticket TKT-0001 status → Closed
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.update_status() [0.4ms]
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.close_ticket() [0.5ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.close_ticket()
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.update_status()
+2026-04-30 18:12:40 | ERROR    | utils | ERROR in TicketStore.update_status(): Ticket TKT-0001 is already closed.
+2026-04-30 18:12:40 | ERROR    | utils | ERROR in TicketStore.close_ticket(): Ticket TKT-0001 is already closed.
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P2' matched keyword 'network down'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp_groizzq\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Henry Ford
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.delete_ticket()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 0 tickets → C:\Users\malik\AppData\Local\Temp\tmp_groizzq\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Deleted ticket TKT-0001
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.delete_ticket() [0.5ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpyv9ayhzu\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P2 | Iris Chan
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.6ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 2 tickets → C:\Users\malik\AppData\Local\Temp\tmpyv9ayhzu\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0002 | P4 | Jack Wu
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P1' matched keyword 'server down'
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P2' matched keyword 'internet down'
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P3' matched keyword 'laptop slow'
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P4' matched keyword 'password reset'
+2026-04-30 18:12:40 | CRITICAL | monitor | MONITOR ALERT | CPU | CPU usage critical: 95.0%
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmp4t4ntgv2\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | System Monitor
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.7ms]
+2026-04-30 18:12:40 | CRITICAL | monitor | Auto-ticket created: TKT-0001 for alert: CPU
+2026-04-30 18:12:40 | INFO     | utils | CALL  → backup_tickets_to_csv()
+2026-04-30 18:12:40 | INFO     | utils | Backed up 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpny7gmtxk\backup.csv
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← backup_tickets_to_csv() [3.0ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → TicketStore.create_ticket()
+2026-04-30 18:12:40 | INFO     | utils | Auto-priority 'P1' matched keyword 'server crash'
+2026-04-30 18:12:40 | INFO     | tickets | Saved 1 tickets → C:\Users\malik\AppData\Local\Temp\tmpflkjc4th\data\tickets.json
+2026-04-30 18:12:40 | INFO     | tickets | Created IncidentTicket TKT-0001 | P1 | JSON Test
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← TicketStore.create_ticket() [0.8ms]
+2026-04-30 18:12:40 | INFO     | utils | CALL  → backup_tickets_to_csv()
+2026-04-30 18:12:40 | WARNING  | utils | backup_tickets_to_csv: no tickets to back up.
+2026-04-30 18:12:40 | INFO     | utils | DONE  ← backup_tickets_to_csv() [0.3ms]
+2026-04-30 18:12:40 | INFO     | tickets | ServiceRequest TKT-0002 approved.
+2026-04-30 18:12:40 | WARNING  | tickets | Ticket TKT-0003 ESCALATED.

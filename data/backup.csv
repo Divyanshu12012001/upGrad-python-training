@@ -1,0 +1,9 @@
+id,type,employee_name,department,issue_description,category,priority,status,created_date,updated_date,escalated,approval_status
+TKT-0001,IncidentTicket,Alice Smith,IT Infrastructure,Server down in rack 3 — production database unreachable,Hardware,P1,In Progress,2025-04-28T08:15:00,2025-04-28T08:45:00,False,
+TKT-0002,IncidentTicket,Bob Jones,Finance,Internet down in the south wing — all users affected,Network,P2,Open,2025-04-28T09:00:00,2025-04-28T09:00:00,False,
+TKT-0003,ServiceRequest,Carol White,Human Resources,Password reset for new joiner account,Access,P4,Resolved,2025-04-27T14:00:00,2025-04-27T14:30:00,,Approved
+TKT-0004,IncidentTicket,Dave Lee,Engineering,Laptop slow — dev machine taking 10+ minutes to boot,Hardware,P3,Open,2025-04-28T10:30:00,2025-04-28T10:30:00,False,
+TKT-0005,IncidentTicket,Eve Brown,IT Infrastructure,Server crash — secondary web server offline after power outage,Hardware,P1,Escalated,2025-04-27T22:00:00,2025-04-28T00:15:00,True,
+TKT-0006,ServiceRequest,Frank Green,Marketing,Request for Adobe Creative Cloud license,Software,P4,Open,2025-04-28T11:00:00,2025-04-28T11:00:00,,Pending
+TKT-0007,IncidentTicket,Grace Hall,Security,Suspicious login attempts detected — possible brute force on VPN,Security,P2,In Progress,2025-04-28T07:45:00,2025-04-28T08:00:00,False,
+TKT-0008,IncidentTicket,System Monitor,IT Infrastructure,CPU usage critical: 93.2% (threshold 90%),Hardware,P1,Open,2025-04-28T06:00:00,2025-04-28T06:00:00,False,

@@ -1,0 +1,33 @@
+{
+  "problems": [
+    {
+      "problem_id": "PRB-0001",
+      "pattern": "server down rack production",
+      "linked_ticket_ids": ["TKT-0001", "TKT-0005"],
+      "status": "Open",
+      "root_cause": "Under Investigation",
+      "workaround": "Failover to secondary data centre activated",
+      "created_date": "2025-04-28T09:00:00"
+    }
+  ],
+  "changes": [
+    {
+      "change_id": "CHG-0001",
+      "title": "UPS Firmware Upgrade — Server Room A",
+      "description": "Upgrade UPS firmware to v4.2 to prevent unexpected shutdowns. Scheduled for weekend maintenance window.",
+      "change_type": "Normal",
+      "requested_by": "Alice Smith",
+      "state": "Approved",
+      "created_date": "2025-04-28T10:00:00"
+    },
+    {
+      "change_id": "CHG-0002",
+      "title": "Emergency VPN ACL Patch",
+      "description": "Apply emergency ACL patch to block brute-force IPs identified in TKT-0007.",
+      "change_type": "Emergency",
+      "requested_by": "Grace Hall",
+      "state": "Implemented",
+      "created_date": "2025-04-28T08:30:00"
+    }
+  ]
+}
